@@ -1,0 +1,9 @@
+.error-text{
+    color: red;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.form-group {
+     margin-bottom: 5px;
+}

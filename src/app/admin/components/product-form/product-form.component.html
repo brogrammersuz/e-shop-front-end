@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-md-6">
+    <form [formGroup]="form"
+      (ngSubmit)="addProduct()">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input id="title"
+          formControlName="title"
+          type="text"
+          class="form-control"
+          name="title">
+      </div>
+      <div *ngIf="title.touched && title.invalid">
+        <h6 class="error-text"
+          *ngIf="title.errors.required">Title is required</h6>
+      </div>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <div class="input-group mg-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input id="price"
+            formControlName="price"
+            type="number"
+            class="form-control"
+            name="price"
+            [min]="0">
+        </div>
+      </div>
+      <div *ngIf="price.touched && price.invalid">
+        <h6 class="error-text"
+          *ngIf="price.errors.required">Price is required</h6>
+        <h6 class="error-text"
+          *ngIf="price.errors.priceIsNegative">Price should be 0 or higher</h6>
+      </div>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category"
+          formControlName="category"
+          class="form-control"
+          name="category">
+          <option value=""></option>
+          <option *ngFor="let category of categories$ | async"
+            [value]="category.id">{{category.name}}</option>
+        </select>
+      </div>
+      <div *ngIf="category.touched && category.invalid">
+        <h6 class="error-text"
+          *ngIf="category.errors.required">Category is required</h6>
+      </div>
+      <div class="form-group">
+        <label for="image">Image</label>
+        <input id="image"
+          formControlName="image"
+          type="file"
+          class="form-control"
+          (change)="onFileSelected($event)"
+          name="image">
+      </div>
+      <div *ngIf="image.touched && image.invalid">
+        <h6 class="error-text"
+          *ngIf="image.errors.required">Image is required</h6>
+      </div>
+      <br>
+      <button class="btn btn-primary"
+        type="submit"
+        [disabled]="form.invalid || form.pristine">Save</button>
+        <button *ngIf="id" class="btn btn-danger"
+        type="button"
+        (click)="deleteProduct()"
+        [disabled]="form.invalid || form.pristine">Delete</button>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <img class="card-img-top"
+        id="selectedImage"
+        width="300px"
+        height="300px"
+        [src]="imageUrl"
+        alt="{{title.value}}">
+      <div class="card-body">
+        <h5 class="card-title">{{title.value}}</h5>
+        <p class="card-text">{{price.value | currency:'USD':'symbol'}}</p>
+      </div>
+    </div>
+
+  </div>

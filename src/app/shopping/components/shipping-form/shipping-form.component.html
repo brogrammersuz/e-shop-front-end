@@ -1,0 +1,71 @@
+<h1>Shipping</h1>
+<br>
+<form #checkoutForm="ngForm"
+  (ngSubmit)="checkout()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input class="form-control"
+      id="name"
+      type="text"
+      minlength="2"
+      maxlength="40"
+      name="name"
+      #nameField="ngModel"
+      [(ngModel)]="shipping.name"
+      required>
+  </div>
+  <div class="alert alert-danger"
+    *ngIf="nameField.touched && !nameField.valid">
+    <div *ngIf="nameField.errors.required">Name is required</div>
+    <div *ngIf="nameField.errors.minlength">Minimum length for the field is {{nameField.errors.minlength.requiredLength}}</div>
+  </div>
+  <div class="form-group">
+    <label for="line1">Adress</label>
+    <input type="text"
+      class="form-control"
+      id="line1"
+      name="line1"
+      minlength="2"
+      maxlength="200"
+      #line1Field="ngModel"
+      [(ngModel)]="shipping.line1"
+      placeholder="Line 1"
+      required>
+  </div>
+  <div class="alert alert-danger"
+    *ngIf="line1Field.touched && !line1Field.valid">
+    <div *ngIf="line1Field.errors.required">Line 1 is required</div>
+    <div *ngIf="line1Field.errors.minlength">Min length is 2 chars</div>
+  </div>
+
+  <div class="form-group">
+    <input type="text"
+      class="form-control"
+      id="line2"
+      name="line2"
+      #line2Field="ngModel"
+      [(ngModel)]="shipping.line2"
+      placeholder="Line 2">
+  </div>
+  <div class="form-group">
+    <label for="city">City</label>
+    <input type="text"
+      class="form-control"
+      id="city"
+      name="city"
+      minlength="2"
+      maxlength="200"
+      #cityField="ngModel"
+      [(ngModel)]="shipping.city"
+      required>
+  </div>
+  <div class="alert alert-danger"
+    *ngIf="cityField.touched && !cityField.valid">
+    <div *ngIf="cityField.errors.required">City is required</div>
+    <div *ngIf="cityField.errors.minlength">Min length is 2 chars</div>
+  </div>
+
+  <button class="btn btn-primary"
+    type="submit"
+    [disabled]="!checkoutForm.valid">Place Order</button>
+</form>

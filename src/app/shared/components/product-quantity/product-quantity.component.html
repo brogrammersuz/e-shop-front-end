@@ -1,0 +1,22 @@
+<div class="row no-gutters">
+  <div class="col-2">
+    <button class="btn btn-secondary btn-block"
+      appDebounceClick
+      (debounceClickEvent)="removeFromCart()">-</button>
+  </div>
+  <div class="col text-center"
+    *ngIf="shoppingCart; else noShoppingCart">
+    {{shoppingCart.getQuantity(product) }} in cart
+  </div>
+  <ng-template #noShoppingCart>
+    <div class="col text-center">
+      0 in cart
+    </div>
+  </ng-template>
+
+  <div class="col-2">
+    <button class="btn btn-secondary btn-block"
+      appDebounceClick
+      (debounceClickEvent)="addToCart()">+</button>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<h2>Order successfully created</h2>
+<br>
+<div *ngIf="order">
+  <h6>User info:
+    <small>{{order.user.name}} {{order.user.surname}}</small>
+  </h6>
+  <h6>Ordered date:
+    <small>{{order.datePlaced | date: 'longDate'}}</small>
+  </h6>
+  <div class="row">
+    <div class="col-2">
+      <h5>Order items:</h5>
+    </div>
+    <div class="col-auto">
+      <h6 *ngFor="let item of order.items">
+        <small>{{item.quantity}} x {{item.product.title}} {{item.product.price * item.quantity | currency: 'USD': 'symbol'}}</small>
+      </h6>
+    </div>
+  </div>
+  <div>
+    <h5>Shipping info:</h5>
+    <h6>Name:
+      <small>{{order.shipping.name}}</small>
+    </h6>
+    <h6>Address:
+      <small>{{order.shipping.line1}}</small>
+      <small>{{order.shipping.line2}}</small>
+    </h6>
+    <h6>City:
+      <small>{{order.shipping.city}}</small>
+    </h6>
+  </div>
+  <div>
+    <h6>Total price:
+      <small>{{totalPrice | currency: 'USD': 'symbol'}}</small>
+    </h6>
+  </div>
+
+</div>

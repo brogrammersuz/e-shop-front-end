@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3 class="mb-0">Sign Up</h3>
+      </div>
+      <div class="card-body">
+        <form (submit)="register()"
+          #form="ngForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text"
+              class="form-control"
+              name="name"
+              [(ngModel)]="name"
+              id="name"
+              minlength="2"
+              maxlength="40"
+              required
+              #nameField="ngModel">
+          </div>
+          <div class="alert alert-danger"
+            *ngIf="nameField.touched && !nameField.valid">
+            <div *ngIf="nameField.errors.required">Name is required</div>
+            <div *ngIf="nameField.errors.minlength">Minimum length for the field is {{nameField.errors.minlength.requiredLength}}</div>
+          </div>
+          <div class="form-group">
+            <label for="surname">Surname</label>
+            <input type="text"
+              class="form-control"
+              name="surname"
+              [(ngModel)]="surname"
+              id="surname"
+              minlength="2"
+              maxlength="40"
+              required
+              #surnameField="ngModel">
+          </div>
+          <div class="alert alert-danger"
+            *ngIf="surnameField.touched && !surnameField.valid">
+            <div *ngIf="surnameField.errors.required">Surname is required</div>
+            <div *ngIf="surnameField.errors.minlength">Minimum length for the field is {{surnameField.errors.minlength.requiredLength}}</div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email"
+              appEmailValidator
+              class="form-control"
+              name="email"
+              [(ngModel)]="email"
+              id="email"
+              #emailField="ngModel"
+              required>
+          </div>
+          <div class="alert alert-danger"
+            *ngIf="emailField.touched && !emailField.valid">
+            <div *ngIf="emailField.errors.required">Email is required</div>
+            <div *ngIf="emailField.errors.notValidEmail && !emailField.errors.required">Not valid email address</div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password"
+              class="form-control"
+              name="password"
+              [(ngModel)]="password"
+              id="password"
+              minlength="4"
+              maxlength="20"
+              required
+              #passwordField="ngModel">
+          </div>
+          <div class="alert alert-danger"
+            *ngIf="passwordField.touched && !passwordField.valid">
+            <div *ngIf="passwordField.errors.required">Surname is required</div>
+            <div *ngIf="passwordField.errors.minlength">Minimum length for the field is {{passwordField.errors.minlength.requiredLength}}</div>
+          </div>
+          <button class="btn btn-primary btn-block"
+            type="submit"
+            [disabled]="!form.valid">Sign up</button>
+        </form>
+        <br>
+        <p>Already registered?
+          <a style="text-decoration: none"
+            [routerLink]="['/login']">Login now!</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

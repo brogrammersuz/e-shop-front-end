@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+
+$primary-color : rgb(108, 212, 108);
+
+body {
+  padding-top: 80px;
+}
+
+.navbar-light .navbar-brand {
+  color: $primary-color;
+  font-size: 20px;
+}
+
+.list-group-item.active {
+  background-color: $primary-color;
+  border-color: $primary-color;
+}

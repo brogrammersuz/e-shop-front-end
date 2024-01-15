@@ -1,0 +1,56 @@
+<h1>Shopping Cart</h1>
+<br>
+<div class="row col-10 border"
+  *ngIf="shoppingCartService && shoppingCartService.currentCart">
+  <br>
+  <div class="col-12"
+    style="display: inline-flex;">
+    <p>You have {{shoppingCartService.currentCart.quantityOfItems}} items in your cart </p>
+    <span class="pull-right"
+      style="margin-left: auto">
+      <button *ngIf="shoppingCartService.currentCart.items.length"
+        class="btn btn-light btn-sm"
+        (click)="clearCart()">Clear Shopping Cart</button>
+    </span>
+  </div>
+  <br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Product</th>
+        <th class="text-center"
+          style="width: 230px">Quantity</th>
+        <th class="text-right"
+          style="width: 200px">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of shoppingCartService.currentCart.items | filerByAlphabeticOrder">
+        <td>
+          <div [style.backgroundImage]="'url(' + item.product.imgUrl + ')'"
+            class="thumbnail"></div>
+        </td>
+        <td>{{item.product.title}}</td>
+        <td>
+          <app-product-quantity [product]="item.product"
+            [shopping-cart]="shoppingCartService.currentCart">
+          </app-product-quantity>
+        </td>
+        <td class="text-right">{{item.totalPrice | currency:'USD':'symbol'}}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="text-right">{{shoppingCartService.currentCart.totalPrice | currency:'USD':'symbol'}}</th>
+      </tr>
+    </tfoot>
+  </table>
+  <button class="btn btn-primary"
+    *ngIf="shoppingCartService.currentCart.items.length"
+    (click)="checkout()">Checkout</button>
+  <br>
+</div>
