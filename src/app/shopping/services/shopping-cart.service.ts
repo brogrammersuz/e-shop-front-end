@@ -29,6 +29,7 @@ export class ShoppingCartService {
     const cartId = localStorage.getItem('cartId');
     let cart = null;
     if (cartId) {
+      console.log(cartId)
       cart = await this.getCartFromAPI(cartId);
     } else {
       cart = await this.createCart();
@@ -36,6 +37,7 @@ export class ShoppingCartService {
     }
 
     this.currentCart = cart;
+    console.log(cart);
     return this.currentCart;
   }
 
