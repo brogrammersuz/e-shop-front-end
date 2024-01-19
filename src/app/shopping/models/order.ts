@@ -4,7 +4,7 @@ import { ShoppingCartItem } from './shopping-cart-item';
 
 export class Order {
   id: number;
-  datePlaced: Date;
+  created: Date;
   items: ShoppingCartItem[] = [];
   user: User;
   constructor(
