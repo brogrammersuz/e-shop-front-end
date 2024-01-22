@@ -23,6 +23,7 @@ export class OrderDetailsComponent implements OnInit {
     this.orderId = this.route.snapshot.params['id'];
     this.orderService.getOrderById(this.orderId).subscribe(
       (data: Order) => {
+        console.log(data)
         this.order = data;
         this.totalPrice = 0;
         data['items'].forEach((item: ShoppingCartItem) => {
